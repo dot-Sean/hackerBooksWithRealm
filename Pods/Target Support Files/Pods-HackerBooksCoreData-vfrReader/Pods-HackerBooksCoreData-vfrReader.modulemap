@@ -1,0 +1,6 @@
+framework module vfrReader {
+  umbrella header "Pods-HackerBooksCoreData-vfrReader-umbrella.h"
+
+  export *
+  module * { export * }
+}
