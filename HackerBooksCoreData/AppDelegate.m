@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "CRODataHandler.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +18,19 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+    CRODataHandler *dataHandler=[CRODataHandler new];
+    //Creamos el contexto de Realm
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    
+    NSArray *json=[dataHandler getJsonArray];
+    //NSLog(@"Hola");
+    
+    //[dataHandler addJsonArray:json
+    //           toRealmContext:realm];
+    
     return YES;
 }
 
