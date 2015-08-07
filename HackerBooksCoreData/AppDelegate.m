@@ -28,8 +28,8 @@
     NSArray *json=[dataHandler getJsonArray];
     //NSLog(@"Hola");
     
-    //[dataHandler addJsonArray:json
-    //           toRealmContext:realm];
+    [dataHandler addJsonArray:json
+               toRealmContext:realm];
     
     return YES;
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C789E6EE-BE15-4F99-B95C-A70C7E5464E3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>HackerBooksCoreData</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8D65B12253FBA2C77A5C1CE3868796C6F12AFD79</key>
+		<string>https://bitbucket.org/agbo/iosintermedioonline-07everpobre</string>
+		<key>FF6E37BFE1DC3FABEE2BA13F6175F34738B33CC0</key>
+		<string>http://github.com/manezgz/hackerBooksWithRealm.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>HackerBooksCoreData.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8D65B12253FBA2C77A5C1CE3868796C6F12AFD79</key>
+		<string>../../Downloads/14128474682014-07-21_01-14-29__20.5-Reducimos-el-tamao-de-las-imagenes-zip</string>
+		<key>FF6E37BFE1DC3FABEE2BA13F6175F34738B33CC0</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://github.com/manezgz/hackerBooksWithRealm.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>FF6E37BFE1DC3FABEE2BA13F6175F34738B33CC0</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8D65B12253FBA2C77A5C1CE3868796C6F12AFD79</string>
+			<key>IDESourceControlWCCName</key>
+			<string>14128474682014-07-21_01-14-29__20.5-Reducimos-el-tamao-de-las-imagenes-zip</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FF6E37BFE1DC3FABEE2BA13F6175F34738B33CC0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>HackerBooksCoreData</string>
+		</dict>
+	</array>
+</dict>
+</plist>

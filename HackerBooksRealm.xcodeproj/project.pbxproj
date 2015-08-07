@@ -12,9 +12,9 @@
 		3A052D911B73ED50006AE5B4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A052D901B73ED50006AE5B4 /* MapKit.framework */; };
 		3A052D941B73FCF1006AE5B4 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A052D931B73FCF1006AE5B4 /* Location.m */; };
 		3A052D961B740465006AE5B4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A052D951B740465006AE5B4 /* CoreLocation.framework */; };
-		3A1D696E1B712787001836F6 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1D69691B712787001836F6 /* UIImage+Alpha.m */; };
-		3A1D696F1B712787001836F6 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1D696B1B712787001836F6 /* UIImage+Resize.m */; };
-		3A1D69701B712787001836F6 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1D696D1B712787001836F6 /* UIImage+RoundedCorner.m */; };
+		3A27DB6B1B7513C20022053E /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A27DB661B7513C20022053E /* UIImage+Alpha.m */; };
+		3A27DB6C1B7513C20022053E /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A27DB681B7513C20022053E /* UIImage+Resize.m */; };
+		3A27DB6D1B7513C20022053E /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A27DB6A1B7513C20022053E /* UIImage+RoundedCorner.m */; };
 		3A329C5E1B4C6BA70024D608 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A329C5D1B4C6BA70024D608 /* Book.m */; };
 		3A329C611B4C6E2C0024D608 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A329C601B4C6E2C0024D608 /* Image.m */; };
 		3A329C641B4C6EB80024D608 /* Pdf.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A329C631B4C6EB80024D608 /* Pdf.m */; };
@@ -69,12 +69,12 @@
 		3A052D921B73FCF1006AE5B4 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		3A052D931B73FCF1006AE5B4 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		3A052D951B740465006AE5B4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		3A1D69681B712787001836F6 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Alpha.h"; path = "../../Downloads/14128474682014-07-21_01-14-29__20.5-Reducimos-el-tamao-de-las-imagenes-zip/Everpobre/UIImage+Alpha.h"; sourceTree = "<group>"; };
-		3A1D69691B712787001836F6 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Alpha.m"; path = "../../Downloads/14128474682014-07-21_01-14-29__20.5-Reducimos-el-tamao-de-las-imagenes-zip/Everpobre/UIImage+Alpha.m"; sourceTree = "<group>"; };
-		3A1D696A1B712787001836F6 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "../../Downloads/14128474682014-07-21_01-14-29__20.5-Reducimos-el-tamao-de-las-imagenes-zip/Everpobre/UIImage+Resize.h"; sourceTree = "<group>"; };
-		3A1D696B1B712787001836F6 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "../../Downloads/14128474682014-07-21_01-14-29__20.5-Reducimos-el-tamao-de-las-imagenes-zip/Everpobre/UIImage+Resize.m"; sourceTree = "<group>"; };
-		3A1D696C1B712787001836F6 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "../../Downloads/14128474682014-07-21_01-14-29__20.5-Reducimos-el-tamao-de-las-imagenes-zip/Everpobre/UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
-		3A1D696D1B712787001836F6 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "../../Downloads/14128474682014-07-21_01-14-29__20.5-Reducimos-el-tamao-de-las-imagenes-zip/Everpobre/UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		3A27DB651B7513C20022053E /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		3A27DB661B7513C20022053E /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		3A27DB671B7513C20022053E /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		3A27DB681B7513C20022053E /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		3A27DB691B7513C20022053E /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		3A27DB6A1B7513C20022053E /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		3A329C5C1B4C6BA70024D608 /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
 		3A329C5D1B4C6BA70024D608 /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
 		3A329C5F1B4C6E2C0024D608 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
@@ -173,12 +173,12 @@
 		3A1D69671B71277B001836F6 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				3A1D69681B712787001836F6 /* UIImage+Alpha.h */,
-				3A1D69691B712787001836F6 /* UIImage+Alpha.m */,
-				3A1D696A1B712787001836F6 /* UIImage+Resize.h */,
-				3A1D696B1B712787001836F6 /* UIImage+Resize.m */,
-				3A1D696C1B712787001836F6 /* UIImage+RoundedCorner.h */,
-				3A1D696D1B712787001836F6 /* UIImage+RoundedCorner.m */,
+				3A27DB651B7513C20022053E /* UIImage+Alpha.h */,
+				3A27DB661B7513C20022053E /* UIImage+Alpha.m */,
+				3A27DB671B7513C20022053E /* UIImage+Resize.h */,
+				3A27DB681B7513C20022053E /* UIImage+Resize.m */,
+				3A27DB691B7513C20022053E /* UIImage+RoundedCorner.h */,
+				3A27DB6A1B7513C20022053E /* UIImage+RoundedCorner.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -520,6 +520,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A27DB6C1B7513C20022053E /* UIImage+Resize.m in Sources */,
 				3A329C641B4C6EB80024D608 /* Pdf.m in Sources */,
 				3AC7FB401B5069D800FB0EC6 /* PdfViewController.m in Sources */,
 				3A329C5E1B4C6BA70024D608 /* Book.m in Sources */,
@@ -529,19 +530,18 @@
 				3A7E8DEA1B6EB4250088FA10 /* ImageForNoteViewController.m in Sources */,
 				3A7E57AC1B4C600800CEF4AE /* AppDelegate.m in Sources */,
 				3AE6081B1B5859DF00CC60E6 /* Note.m in Sources */,
-				3A1D696F1B712787001836F6 /* UIImage+Resize.m in Sources */,
 				3A329C6C1B4C93B80024D608 /* Tag.m in Sources */,
 				3A010A3A1B4F46D7001699B7 /* Author.m in Sources */,
 				3A7E57A91B4C600800CEF4AE /* main.m in Sources */,
 				3A5A310F1B545B4600EC5C8F /* NoteCell.m in Sources */,
 				3A052D8F1B73EB8A006AE5B4 /* LocationValueTransformer.m in Sources */,
 				3A7E8DED1B6FF0EA0088FA10 /* ImageValueTransformer.m in Sources */,
+				3A27DB6D1B7513C20022053E /* UIImage+RoundedCorner.m in Sources */,
 				3A329C681B4C80570024D608 /* CRODataHandler.m in Sources */,
-				3A1D69701B712787001836F6 /* UIImage+RoundedCorner.m in Sources */,
 				3AC7FB3D1B505BC000FB0EC6 /* BookViewController.m in Sources */,
 				3A329C891B4EF3C50024D608 /* BookCell.m in Sources */,
+				3A27DB6B1B7513C20022053E /* UIImage+Alpha.m in Sources */,
 				3A329C611B4C6E2C0024D608 /* Image.m in Sources */,
-				3A1D696E1B712787001836F6 /* UIImage+Alpha.m in Sources */,
 				3A052D941B73FCF1006AE5B4 /* Location.m in Sources */,
 				3A7FD1C01B73E2C7000BC8FE /* MapViewController.m in Sources */,
 			);
