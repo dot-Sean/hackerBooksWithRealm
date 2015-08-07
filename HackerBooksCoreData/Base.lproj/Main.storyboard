@@ -335,6 +335,12 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Crz-3J-F5D"/>
+                                    <barButtonItem systemItem="organize" id="b7X-ec-4Vm">
+                                        <connections>
+                                            <action selector="openImageFolder:" destination="FDl-8h-WgW" id="CWJ-ih-bN8"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="y0Y-hy-ya2"/>
                                     <barButtonItem systemItem="trash" id="Gtb-aq-pwj">
                                         <connections>
                                             <action selector="deleteImage:" destination="FDl-8h-WgW" id="2hh-yZ-BL8"/>
