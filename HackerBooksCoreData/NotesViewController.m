@@ -24,9 +24,11 @@ static NSString * const reuseIdentifier = @"NoteCell";
     self.collectionView.emptyDataSetSource = self;
     self.collectionView.emptyDataSetDelegate = self;
     
-    //Add ToolBar with delete Button
+    //Add ToolBar with delete Button And Share Button
     UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteAction)];
-    self.toolbarItems=[NSArray arrayWithObjects:deleteBarButtonItem,nil];
+    UIBarButtonItem *actionBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareAction)];
+
+    self.toolbarItems=[NSArray arrayWithObjects:deleteBarButtonItem,actionBarButtonItem,nil];
     
     [self configureSingleSelectionView];
 }
@@ -198,6 +200,23 @@ static NSString * const reuseIdentifier = @"NoteCell";
 -(void) cancelAction{
     [self configureSingleSelectionView];
     [self.collectionView reloadData];
+}
+
+-(void) shareAction{
+    //NSArray *array=self.selectedNotes;
+    //NSMutableArray *postItems=[NSMutableArray array];
+    //for(Note *note in array){
+    //    [postItems addObject:note.title];
+        //[postItems addObject:[UIImage imageWithData:note.image.data]];
+    //}
+    
+    UIImage *image=[UIImage imageNamed:@"noImage"];
+    NSString *str=@"Image form My app";
+    NSArray *postItems=@[str,image];
+    UIActivityViewController *controller =
+    [[UIActivityViewController alloc] initWithActivityItems:postItems
+                                      applicationActivities:nil];
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 -(void) deleteAction{

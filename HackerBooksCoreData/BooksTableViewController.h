@@ -10,9 +10,12 @@
 #import "Book.h"
 #import "BookViewController.h"
 
-@interface BooksTableViewController : UITableViewController<UITableViewDelegate,CROBookViewControllerDelegate>
+@interface BooksTableViewController : UITableViewController<UITableViewDelegate,CROBookViewControllerDelegate,UISearchBarDelegate, UISearchResultsUpdating>
 
 @property(strong,nonatomic) Book *bookSelected;
 @property(strong,nonatomic) RLMResults *tags;
+@property(strong,nonatomic) RLMResults *books;
+@property (strong, nonatomic) UISearchController *searchController;
+@property(nonatomic) NSInteger searchIndex;
 
 @end

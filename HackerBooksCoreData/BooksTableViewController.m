@@ -25,12 +25,26 @@
     [super viewDidLoad];
     //call Realm to return data
     self.tags = [Tag allObjects];
+    self.books =[Book allObjects];
     //self.tableView.delegate=self;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    //Configuramos la barra de busqueda de libros
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.searchBar.scopeButtonTitles=@[@"Tags",@"Title",@"Authors"];
+    self.searchController.searchBar.delegate = self;
+    
+    
+    
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    
+    self.definesPresentationContext = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,20 +55,31 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return self.tags.count;
+    if(self.searchIndex==0){
+        return self.tags.count;
+    }else{
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    Tag *tag=[self.tags objectAtIndex:section];
-    return tag.books.count;
+    if(self.searchIndex==0){
+        Tag *tag=[self.tags objectAtIndex:section];
+        return tag.books.count;
+    }else{
+        return [self.books count];
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView
 titleForHeaderInSection:(NSInteger)section{
-    Tag *tag=[self.tags objectAtIndex:section];
-    return [tag.tagName capitalizedString];
+    if(self.searchIndex==0){
+        Tag *tag=[self.tags objectAtIndex:section];
+        return [tag.tagName capitalizedString];
+    }else{
+        return @"Books";
+    }
 }
 
 
@@ -64,9 +89,13 @@ titleForHeaderInSection:(NSInteger)section{
     BookCell *customCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     //Me pasa una cosa curiosa, al reciclar una cell si, como la cell ya tiene una imagen
     //me la devuelve con la misma que ya tenia
-    
-    //Obtenemos el Book
-    Book *book=[self bookForIndexPath:indexPath];
+    Book *book=nil;
+    if(self.searchIndex==0){
+        //Obtenemos el Book
+        book=[self bookForIndexPath:indexPath];
+    }else{
+        book = [self.books objectAtIndex:indexPath.row];
+    }
     
     // Sincronizamos modelo con vista (celda)
     //NSData *imageData=[[NSData alloc]initWithContentsOfURL:([book imageProxy])];
@@ -82,7 +111,12 @@ titleForHeaderInSection:(NSInteger)section{
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    self.bookSelected=[self bookForIndexPath:indexPath];
+    if(self.searchIndex==0){
+        self.bookSelected=[self bookForIndexPath:indexPath];
+    }else{
+        self.bookSelected=[self.books objectAtIndex:indexPath.row];
+    }
+    
     [self performSegueWithIdentifier: @"bookDetail"
                               sender: self];
 }
@@ -147,40 +181,55 @@ titleForHeaderInSection:(NSInteger)section{
     }
 }
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+# pragma mark - Delegate SearchController
+- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope{
+    NSLog(@"el indice es %ld",selectedScope);
+    self.searchIndex=selectedScope;
+    [self updateSearchResultsForSearchController:self.searchController];
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searchIndex=0;
+    self.searchController.searchBar.selectedScopeButtonIndex=0;
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController{
+    NSString *searchString = searchController.searchBar.text;
+    self.searchIndex=self.searchController.searchBar.selectedScopeButtonIndex;
+    NSPredicate *predicate=nil;
+    
+    switch (self.searchIndex){
+        case 0:
+            if(![searchString isEqualToString:@""]){
+                predicate = [NSPredicate predicateWithFormat:@"tagName CONTAINS[c]%@", searchString];
+            }else{
+                predicate=[NSPredicate predicateWithValue:YES];
+            }
+            self.tags = [Tag objectsWithPredicate:predicate];
+            break;
+            
+        case 1:
+            if(![searchString isEqualToString:@""]){
+                predicate = [NSPredicate predicateWithFormat:@"title CONTAINS[c]%@", searchString];
+            }else{
+                predicate=[NSPredicate predicateWithValue:YES];
+            }
+            self.books = [Book objectsWithPredicate:predicate];
+            break;
+            
+        case 2:
+            if(![searchString isEqualToString:@""]){
+                predicate = [NSPredicate predicateWithFormat:@"ANY authors.authorName CONTAINS[c]%@", searchString];
+            }else{
+                predicate=[NSPredicate predicateWithValue:YES];
+            }
+            self.books = [Book objectsWithPredicate:predicate];
+            break;
+            
+    }
+    [self.tableView reloadData];
 }
-*/
 
 #pragma mark -Delegates
 -(void) didChangeBook:(Book *)aBook{
