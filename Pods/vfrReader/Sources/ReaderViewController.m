@@ -65,6 +65,8 @@
 	NSDate *lastHideTime;
 
 	BOOL ignoreDidScroll;
+    
+    UIView *fakeView;
 }
 
 #pragma mark - Constants
@@ -255,6 +257,43 @@
 	}
 }
 
+- (void)hideFakeView
+{
+    if (fakeView.hidden == NO)
+    {
+        [UIView animateWithDuration:0.25 delay:0.0
+                            options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction
+                         animations:^(void)
+         {
+             fakeView.alpha = 0.0f;
+         }
+                         completion:^(BOOL finished)
+         {
+             fakeView.hidden = YES;
+         }
+         ];
+    }
+}
+
+- (void)showFakeView
+{
+    if (fakeView.hidden == YES)
+    {
+        
+        [UIView animateWithDuration:0.25 delay:0.0
+                            options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction
+                         animations:^(void)
+         {
+             fakeView.hidden = NO;
+             fakeView.alpha = 1.0f;
+         }
+                         completion:NULL
+         ];
+    }
+}
+
+
+
 - (void)showDocument
 {
 	[self updateContentSize:theScrollView]; // Update content size first
@@ -353,8 +392,16 @@
 	theScrollView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 	theScrollView.backgroundColor = [UIColor clearColor]; theScrollView.delegate = self;
 	[self.view addSubview:theScrollView];
+    
+    CGRect viewRectFake = viewRect;
+    viewRectFake.size.height = 20;
+    fakeView=[[UIView alloc]initWithFrame:viewRectFake];
+    fakeView.backgroundColor=[UIColor colorWithWhite:0.94f alpha:0.94f];
+    [self.view addSubview:fakeView];
 
-	CGRect toolbarRect = viewRect; toolbarRect.size.height = TOOLBAR_HEIGHT;
+	CGRect toolbarRect = viewRect;
+    toolbarRect.size.height = TOOLBAR_HEIGHT;
+    toolbarRect.origin.y =20;
 	mainToolbar = [[ReaderMainToolbar alloc] initWithFrame:toolbarRect document:document]; // ReaderMainToolbar
 	mainToolbar.delegate = self; // ReaderMainToolbarDelegate
 	[self.view addSubview:mainToolbar];
@@ -609,7 +656,10 @@
 				{
 					if ((mainToolbar.alpha < 1.0f) || (mainPagebar.alpha < 1.0f)) // Hidden
 					{
-						[mainToolbar showToolbar]; [mainPagebar showPagebar]; // Show
+						[mainToolbar showToolbar];
+                        [mainPagebar showPagebar];
+                        [self showFakeView];
+                        // Show
 					}
 				}
 			}
@@ -704,7 +754,9 @@
 			if (CGRectContainsPoint(areaRect, point) == false) return;
 		}
 
-		[mainToolbar hideToolbar]; [mainPagebar hidePagebar]; // Hide
+		[mainToolbar hideToolbar];
+        [mainPagebar hidePagebar]; // Hide
+        [self hideFakeView];
 
 		lastHideTime = [NSDate date]; // Set last hide time
 	}

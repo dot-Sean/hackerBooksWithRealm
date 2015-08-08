@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ReaderViewController.h"
 
-@interface PdfViewController : ReaderViewController
+@interface PdfViewController : ReaderViewController<ReaderViewControllerDelegate>
 
 @end

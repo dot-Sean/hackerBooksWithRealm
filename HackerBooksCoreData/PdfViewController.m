@@ -19,6 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.delegate=self;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,5 +37,13 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - ReaderViewControllerDelegate methods
+
+- (void)dismissReaderViewController:(ReaderViewController *)viewController{
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 
 @end

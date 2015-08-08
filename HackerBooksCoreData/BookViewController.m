@@ -151,8 +151,7 @@
     NSString *filePath = [baseDocumentPath stringByAppendingPathComponent:fileName];
     ReaderDocument *document = [ReaderDocument withDocumentFilePath:filePath password:nil];
     PdfViewController *pdfVC=[[PdfViewController alloc]initWithReaderDocument:document];
-    [self.navigationController pushViewController:pdfVC
-                                         animated:true];
+    [self.navigationController showDetailViewController:pdfVC sender:self];
     //[self performSegueWithIdentifier: @"bookPdf"
     //                          sender: self];
 }
