@@ -10,6 +10,8 @@
 #import "CRODataHandler.h"
 #import "AFNetworkActivityIndicatorManager.h"
 
+NSString *const JSON_DOWNLOADED_AND_PARSED = @"jsonDownloadedAndParsed";
+
 @interface AppDelegate ()
 
 @end
@@ -20,17 +22,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
+    
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
-    CRODataHandler *dataHandler=[CRODataHandler new];
-    //Creamos el contexto de Realm
-    RLMRealm *realm = [RLMRealm defaultRealm];
+     if(![[NSUserDefaults standardUserDefaults]boolForKey:JSON_DOWNLOADED_AND_PARSED]){
+         CRODataHandler *dataHandler=[CRODataHandler new];
+         RLMRealm *realm = [RLMRealm defaultRealm];
     
-    NSArray *json=[dataHandler getJsonArray];
-    //NSLog(@"Hola");
-    
-    [dataHandler addJsonArray:json
+         NSArray *json=[dataHandler getJsonArray];
+         [dataHandler addJsonArray:json
                toRealmContext:realm];
-    
+         [[NSUserDefaults standardUserDefaults]setBool:YES forKey:JSON_DOWNLOADED_AND_PARSED];
+     }
     return YES;
 }
 
