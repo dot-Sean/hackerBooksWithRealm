@@ -23,6 +23,7 @@
 @property NSString *imageUrl;
 @property NSString *pdfUrl;
 @property bool favorite;
+@property long lastPageRead;
 @property(nonatomic) Image *bookImage;
 @property Pdf *bookPdf;
 @property RLMArray<Tag> *tags;

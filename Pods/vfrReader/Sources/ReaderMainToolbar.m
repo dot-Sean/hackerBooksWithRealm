@@ -64,6 +64,8 @@
 	return [self initWithFrame:frame document:nil];
 }
 
+
+
 - (instancetype)initWithFrame:(CGRect)frame document:(ReaderDocument *)document
 {
 	assert(document != nil); // Must have a valid ReaderDocument
@@ -131,54 +133,45 @@
 #endif // end of READER_ENABLE_THUMBS Option
 
 		CGFloat rightButtonX = viewWidth; // Right-side buttons start X position
+        rightButtonX -= (iconButtonWidth + buttonSpacing); // Next position
+        
+        UIButton *bookNotesButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        bookNotesButton.frame = CGRectMake(rightButtonX, BUTTON_Y, iconButtonWidth, BUTTON_HEIGHT);
+        [bookNotesButton setImage:[UIImage imageNamed:@"book"] forState:UIControlStateNormal];
+        [bookNotesButton addTarget:self action:@selector(bookNotesButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+        [bookNotesButton setBackgroundImage:buttonH forState:UIControlStateHighlighted];
+        [bookNotesButton setBackgroundImage:buttonN forState:UIControlStateNormal];
+        bookNotesButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+        bookNotesButton.exclusiveTouch = YES;
+        [self addSubview:bookNotesButton]; titleWidth -= (iconButtonWidth + buttonSpacing);
+        
+        
+        
 
-#if (READER_BOOKMARKS == TRUE) // Option
-
-		rightButtonX -= (iconButtonWidth + buttonSpacing); // Position
-
-		UIButton *flagButton = [UIButton buttonWithType:UIButtonTypeCustom];
-		flagButton.frame = CGRectMake(rightButtonX, BUTTON_Y, iconButtonWidth, BUTTON_HEIGHT);
-		//[flagButton setImage:[UIImage imageNamed:@"Reader-Mark-N"] forState:UIControlStateNormal];
-		[flagButton addTarget:self action:@selector(markButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-		[flagButton setBackgroundImage:buttonH forState:UIControlStateHighlighted];
-		[flagButton setBackgroundImage:buttonN forState:UIControlStateNormal];
-		flagButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-		//flagButton.backgroundColor = [UIColor grayColor];
-		flagButton.exclusiveTouch = YES;
-
-		[self addSubview:flagButton]; titleWidth -= (iconButtonWidth + buttonSpacing);
-
-		markButton = flagButton; markButton.enabled = NO; markButton.tag = NSIntegerMin;
-
-		markImageN = [UIImage imageNamed:@"Reader-Mark-N"]; // N image
-		markImageY = [UIImage imageNamed:@"Reader-Mark-Y"]; // Y image
-
-#endif // end of READER_BOOKMARKS Option
-
-		if (document.canEmail == YES) // Document email enabled
-		{
-			if ([MFMailComposeViewController canSendMail] == YES) // Can email
-			{
-				unsigned long long fileSize = [document.fileSize unsignedLongLongValue];
-
-				if (fileSize < 15728640ull) // Check attachment size limit (15MB)
-				{
-					rightButtonX -= (iconButtonWidth + buttonSpacing); // Next position
-
-					UIButton *emailButton = [UIButton buttonWithType:UIButtonTypeCustom];
-					emailButton.frame = CGRectMake(rightButtonX, BUTTON_Y, iconButtonWidth, BUTTON_HEIGHT);
-					[emailButton setImage:[UIImage imageNamed:@"Reader-Email"] forState:UIControlStateNormal];
-					[emailButton addTarget:self action:@selector(emailButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-					[emailButton setBackgroundImage:buttonH forState:UIControlStateHighlighted];
-					[emailButton setBackgroundImage:buttonN forState:UIControlStateNormal];
-					emailButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-					//emailButton.backgroundColor = [UIColor grayColor];
-					emailButton.exclusiveTouch = YES;
-
-					[self addSubview:emailButton]; titleWidth -= (iconButtonWidth + buttonSpacing);
-				}
-			}
-		}
+//		if (document.canEmail == YES) // Document email enabled
+//		{
+//			if ([MFMailComposeViewController canSendMail] == YES) // Can email
+//			{
+//				unsigned long long fileSize = [document.fileSize unsignedLongLongValue];
+//
+//				if (fileSize < 15728640ull) // Check attachment size limit (15MB)
+//				{
+//					rightButtonX -= (iconButtonWidth + buttonSpacing); // Next position
+//
+//					UIButton *emailButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//					emailButton.frame = CGRectMake(rightButtonX, BUTTON_Y, iconButtonWidth, BUTTON_HEIGHT);
+//					[emailButton setImage:[UIImage imageNamed:@"book"] forState:UIControlStateNormal];
+//					[emailButton addTarget:self action:@selector(emailButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+//					[emailButton setBackgroundImage:buttonH forState:UIControlStateHighlighted];
+//					[emailButton setBackgroundImage:buttonN forState:UIControlStateNormal];
+//					emailButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+//					//emailButton.backgroundColor = [UIColor grayColor];
+//					emailButton.exclusiveTouch = YES;
+//
+//					[self addSubview:emailButton]; titleWidth -= (iconButtonWidth + buttonSpacing);
+//				}
+//			}
+//		}
 
 		if ((document.canPrint == YES) && (document.password == nil)) // Document print enabled
 		{
@@ -351,6 +344,11 @@
 - (void)markButtonTapped:(UIButton *)button
 {
 	[delegate tappedInToolbar:self markButton:button];
+}
+
+- (void)bookNotesButtonTapped:(UIButton *)button
+{
+    [delegate tappedInToolbar:self bookNotesButton:button];
 }
 
 @end

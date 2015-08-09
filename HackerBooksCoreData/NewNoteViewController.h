@@ -19,6 +19,7 @@
 
 @property(strong,nonatomic) Book *model;
 @property(strong,nonatomic) Note *creatingNote;
+@property(nonatomic) int bookPage;
 @property(strong,nonatomic) XLFormRowDescriptor * selector;
 @property(strong,nonatomic) XLFormRowDescriptor * selector2;
 @property (nonatomic) BOOL modifying;

@@ -12,6 +12,7 @@
 @interface NotesViewController : UICollectionViewController<UITableViewDelegate>
 
 @property(strong,nonatomic) Book *model;
+@property(nonatomic) NSNumber *actualPage;
 @property(nonatomic, strong) NSMutableArray *selectedNotes;
 
 @end

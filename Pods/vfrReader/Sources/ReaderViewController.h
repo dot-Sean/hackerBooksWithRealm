@@ -24,10 +24,17 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ReaderMainToolbar.h"
 #import "ReaderDocument.h"
 
 @class ReaderViewController;
+
+@protocol GestureDelegate <NSObject>
+
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer;
+- (void)handleDoubleTap:(UITapGestureRecognizer *)recognizer;
+
+@end
 
 @protocol ReaderViewControllerDelegate <NSObject>
 
@@ -39,8 +46,12 @@
 
 @interface ReaderViewController : UIViewController
 
+@property(nonatomic,strong) ReaderMainToolbar *mainToolbar;
+@property(nonatomic,strong) id<ReaderMainToolbarDelegate> mainToolBarDelegate;
 @property (nonatomic, weak, readwrite) id <ReaderViewControllerDelegate> delegate;
 
 - (instancetype)initWithReaderDocument:(ReaderDocument *)object;
+
+- (void) closeDocument;
 
 @end

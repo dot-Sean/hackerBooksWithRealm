@@ -119,6 +119,7 @@ NSString *const kSelectorImagePopover = @"selectorImagePopover";
     self.creatingNote.title=title;
     self.creatingNote.image=self.selector.value;
     self.creatingNote.location=self.selector2.value;
+    self.creatingNote.bookPage=self.bookPage;
     if(self.modifying){
         self.creatingNote.lastModificationDate=[NSDate date];
         [Note createOrUpdateInRealm:context

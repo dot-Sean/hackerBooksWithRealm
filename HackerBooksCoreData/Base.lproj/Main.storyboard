@@ -99,13 +99,13 @@
                                     <barButtonItem image="note" style="plain" id="jPp-iC-Gul">
                                         <connections>
                                             <action selector="viewNotes:" destination="r90-q8-UbJ" id="PKi-sU-Iwf"/>
-                                            <segue destination="9lg-V5-Hcu" kind="show" id="Akx-eC-rp4"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="frb-Sv-XlR"/>
                                     <barButtonItem image="book" style="plain" id="3Xm-wG-tWH">
                                         <connections>
                                             <action selector="viewBook:" destination="r90-q8-UbJ" id="wUt-Pn-iME"/>
+                                            <segue destination="8LG-Aj-orN" kind="showDetail" identifier="ShowBookPdf" id="zcT-qS-RFY"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -201,9 +201,9 @@
         <!--Notes-->
         <scene sceneID="NRx-G9-2sf">
             <objects>
-                <collectionViewController id="9lg-V5-Hcu" customClass="NotesViewController" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="SBNotes" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9lg-V5-Hcu" customClass="NotesViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Vb2-MP-fv7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4Z1-8b-3gy">
                             <size key="itemSize" width="100" height="100"/>
@@ -254,7 +254,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pqu-zX-otl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2036" y="671"/>
+            <point key="canvasLocation" x="4236" y="-115"/>
         </scene>
         <!--New Note View Controller-->
         <scene sceneID="RZ0-9M-egE">
@@ -277,7 +277,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UWA-bZ-KxT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3529" y="589"/>
+            <point key="canvasLocation" x="4161" y="637"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="48X-cu-eI3">
+            <objects>
+                <navigationController toolbarHidden="NO" id="xBu-Fd-S1g" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oUi-dz-1ZV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="9lg-V5-Hcu" kind="relationship" relationship="rootViewController" id="vpH-KK-rcF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V5W-td-jgX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3523" y="-113"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="Fkx-66-99w">
@@ -309,7 +325,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yxu-Nv-ph9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4261" y="589"/>
+            <point key="canvasLocation" x="4701" y="1349"/>
         </scene>
         <!--Image For Note View Controller-->
         <scene sceneID="SeF-PT-T5m">
@@ -369,7 +385,35 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O2W-Kb-V4m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3513" y="1349"/>
+            <point key="canvasLocation" x="3633" y="1341"/>
+        </scene>
+        <!--Pdf View Controller-->
+        <scene sceneID="1cV-aB-CTQ">
+            <objects>
+                <viewController id="8LG-Aj-orN" customClass="PdfViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xlP-wk-bCc"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hz4-dp-kxQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PzS-Tn-jSI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vxa-BB-uoW">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="Vxa-BB-uoW" id="pSJ-lF-c8E"/>
+                        <segue destination="xBu-Fd-S1g" kind="show" identifier="ShowBookNotesSegue" id="Dm7-A4-t8r"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9B7-N5-Lu4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2801" y="-113"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Uuj-gc-hKB">
@@ -385,7 +429,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pwb-Zz-o7L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2799" y="589"/>
+            <point key="canvasLocation" x="4943" y="-115"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wjv-4I-qj2">
@@ -403,7 +447,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cH9-WP-QUC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="419" y="-115"/>
+            <point key="canvasLocation" x="63" y="-527"/>
         </scene>
     </scenes>
     <resources>

@@ -26,7 +26,6 @@
 #import "ReaderConstants.h"
 #import "ReaderViewController.h"
 #import "ThumbsViewController.h"
-#import "ReaderMainToolbar.h"
 #import "ReaderMainPagebar.h"
 #import "ReaderContentView.h"
 #import "ReaderThumbCache.h"
@@ -34,8 +33,7 @@
 
 #import <MessageUI/MessageUI.h>
 
-@interface ReaderViewController () <UIScrollViewDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate, UIDocumentInteractionControllerDelegate,
-									ReaderMainToolbarDelegate, ReaderMainPagebarDelegate, ReaderContentViewDelegate, ThumbsViewControllerDelegate>
+@interface ReaderViewController () <UIScrollViewDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate, UIDocumentInteractionControllerDelegate,ReaderMainPagebarDelegate, ReaderContentViewDelegate, ThumbsViewControllerDelegate,GestureDelegate>
 @end
 
 @implementation ReaderViewController
@@ -43,8 +41,6 @@
 	ReaderDocument *document;
 
 	UIScrollView *theScrollView;
-
-	ReaderMainToolbar *mainToolbar;
 
 	ReaderMainPagebar *mainPagebar;
 
@@ -122,7 +118,7 @@
 		scrollView.contentOffset = contentOffset; // Update content offset
 	}
 
-	[mainToolbar setBookmarkState:[document.bookmarks containsIndex:page]];
+	[self.mainToolbar setBookmarkState:[document.bookmarks containsIndex:page]];
 
 	[mainPagebar updatePagebar]; // Update page bar
 }
@@ -223,7 +219,7 @@
 			}
 		];
 
-		[mainToolbar setBookmarkState:[document.bookmarks containsIndex:page]];
+		[self.mainToolbar setBookmarkState:[document.bookmarks containsIndex:page]];
 
 		[mainPagebar updatePagebar]; // Update page bar
 	}
@@ -251,7 +247,7 @@
 			}
 		];
 
-		[mainToolbar setBookmarkState:[document.bookmarks containsIndex:page]];
+		[self.mainToolbar setBookmarkState:[document.bookmarks containsIndex:page]];
 
 		[mainPagebar updatePagebar]; // Update page bar
 	}
@@ -344,6 +340,7 @@
 			[object updateDocumentProperties]; document = object; // Retain the supplied ReaderDocument object for our use
 
 			[ReaderThumbCache touchThumbCacheWithGUID:object.guid]; // Touch the document thumb cache directory
+            
 		}
 		else // Invalid ReaderDocument object
 		{
@@ -367,7 +364,8 @@
 
 	self.view.backgroundColor = [UIColor grayColor]; // Neutral gray
 
-	UIView *fakeStatusBar = nil; CGRect viewRect = self.view.bounds; // View bounds
+	UIView *fakeStatusBar = nil;
+    CGRect viewRect = self.view.bounds; // View bounds
 
 	if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) // iOS 7+
 	{
@@ -402,9 +400,10 @@
 	CGRect toolbarRect = viewRect;
     toolbarRect.size.height = TOOLBAR_HEIGHT;
     toolbarRect.origin.y =20;
-	mainToolbar = [[ReaderMainToolbar alloc] initWithFrame:toolbarRect document:document]; // ReaderMainToolbar
-	mainToolbar.delegate = self; // ReaderMainToolbarDelegate
-	[self.view addSubview:mainToolbar];
+	self.mainToolbar = [[ReaderMainToolbar alloc] initWithFrame:toolbarRect document:document]; // ReaderMainToolbar
+	//mainToolbar.delegate = self; // ReaderMainToolbarDelegate
+	[self.view addSubview:self.mainToolbar];
+    self.mainToolbar.delegate = self.mainToolBarDelegate;
 
 	CGRect pagebarRect = self.view.bounds; pagebarRect.size.height = PAGEBAR_HEIGHT;
 	pagebarRect.origin.y = (self.view.bounds.size.height - pagebarRect.size.height);
@@ -413,20 +412,6 @@
 	[self.view addSubview:mainPagebar];
 
 	if (fakeStatusBar != nil) [self.view addSubview:fakeStatusBar]; // Add status bar background view
-
-	UITapGestureRecognizer *singleTapOne = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-	singleTapOne.numberOfTouchesRequired = 1; singleTapOne.numberOfTapsRequired = 1; singleTapOne.delegate = self;
-	[self.view addGestureRecognizer:singleTapOne];
-
-	UITapGestureRecognizer *doubleTapOne = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
-	doubleTapOne.numberOfTouchesRequired = 1; doubleTapOne.numberOfTapsRequired = 2; doubleTapOne.delegate = self;
-	[self.view addGestureRecognizer:doubleTapOne];
-
-	UITapGestureRecognizer *doubleTapTwo = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
-	doubleTapTwo.numberOfTouchesRequired = 2; doubleTapTwo.numberOfTapsRequired = 2; doubleTapTwo.delegate = self;
-	[self.view addGestureRecognizer:doubleTapTwo];
-
-	[singleTapOne requireGestureRecognizerToFail:doubleTapOne]; // Single tap requires double tap to fail
 
 	contentViews = [NSMutableDictionary new]; lastHideTime = [NSDate date];
 
@@ -490,7 +475,7 @@
 	NSLog(@"%s", __FUNCTION__);
 #endif
 
-	mainToolbar = nil; mainPagebar = nil;
+	self.mainToolbar = nil; mainPagebar = nil;
 
 	theScrollView = nil; contentViews = nil; lastHideTime = nil;
 
@@ -654,9 +639,9 @@
 			{
 				if ([lastHideTime timeIntervalSinceNow] < -0.75) // Delay since hide
 				{
-					if ((mainToolbar.alpha < 1.0f) || (mainPagebar.alpha < 1.0f)) // Hidden
+					if ((self.mainToolbar.alpha < 1.0f) || (mainPagebar.alpha < 1.0f)) // Hidden
 					{
-						[mainToolbar showToolbar];
+						[self.mainToolbar showToolbar];
                         [mainPagebar showPagebar];
                         [self showFakeView];
                         // Show
@@ -741,7 +726,7 @@
 
 - (void)contentView:(ReaderContentView *)contentView touchesBegan:(NSSet *)touches
 {
-	if ((mainToolbar.alpha > 0.0f) || (mainPagebar.alpha > 0.0f))
+	if ((self.mainToolbar.alpha > 0.0f) || (mainPagebar.alpha > 0.0f))
 	{
 		if (touches.count == 1) // Single touches only
 		{
@@ -754,7 +739,7 @@
 			if (CGRectContainsPoint(areaRect, point) == false) return;
 		}
 
-		[mainToolbar hideToolbar];
+		[self.mainToolbar hideToolbar];
         [mainPagebar hidePagebar]; // Hide
         [self hideFakeView];
 
@@ -889,15 +874,17 @@
 
 	if ([document.bookmarks containsIndex:currentPage]) // Remove bookmark
 	{
-		[document.bookmarks removeIndex:currentPage]; [mainToolbar setBookmarkState:NO];
+		[document.bookmarks removeIndex:currentPage]; [self.mainToolbar setBookmarkState:NO];
 	}
 	else // Add the bookmarked page number to the bookmark index set
 	{
-		[document.bookmarks addIndex:currentPage]; [mainToolbar setBookmarkState:YES];
+		[document.bookmarks addIndex:currentPage]; [self.mainToolbar setBookmarkState:YES];
 	}
 
 #endif // end of READER_BOOKMARKS Option
 }
+
+
 
 #pragma mark - MFMailComposeViewControllerDelegate methods
 

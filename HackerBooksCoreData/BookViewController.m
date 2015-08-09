@@ -119,7 +119,7 @@
             self.progressView.progress=0;
             self.progressLabel.text=@"Downloading...";
             [self relocatePdf:self.model];
-            [self loadPdf:self.model];
+           // [self generateDocument];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //NSLog(@"Error: %@", error);
         }];
@@ -127,7 +127,6 @@
         [operation start];
     }else{
         [self relocatePdf:self.model];
-        [self loadPdf:self.model];
     }
     return book.bookPdf.data;
 }
@@ -142,27 +141,30 @@
     [book.bookPdf.data writeToFile:(filePath) atomically:YES];
 }
 
--(void) loadPdf:(Book*)book{
+- (ReaderDocument *) generateDocument{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *baseDocumentPath = [paths objectAtIndex:0];
     NSString *fileName=@"/";
-    fileName=[fileName stringByAppendingString:book.title];
+    fileName=[fileName stringByAppendingString:self.model.title];
     fileName=[fileName stringByAppendingString:@".pdf"];
     NSString *filePath = [baseDocumentPath stringByAppendingPathComponent:fileName];
-    ReaderDocument *document = [ReaderDocument withDocumentFilePath:filePath password:nil];
-    PdfViewController *pdfVC=[[PdfViewController alloc]initWithReaderDocument:document];
-    [self.navigationController showDetailViewController:pdfVC sender:self];
-    //[self performSegueWithIdentifier: @"bookPdf"
-    //                          sender: self];
+    return [ReaderDocument withDocumentFilePath:filePath password:nil];
 }
 
 //In a storyboard-based application, you will often want to do a little preparation before navigation
 # pragma mark -Storyboard Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    //Get the new view controller using [segue destinationViewController].
-    //Pass the selected object to the new view controller.
-    NotesViewController *notesVC = segue.destinationViewController;
-    notesVC.model=self.model;
+    if ([segue.identifier isEqualToString:@"ShowImage"]) {
+        //Get the new view controller using [segue destinationViewController].
+        //Pass the selected object to the new view controller.
+        NotesViewController *notesVC = segue.destinationViewController;
+        notesVC.model=self.model;
+    }else if ([segue.identifier isEqualToString:@"ShowBookPdf"]) {
+        [self getPdfDataFromBook:self.model];
+        PdfViewController *pdfVC = segue.destinationViewController;
+        pdfVC.document =[self generateDocument];
+        pdfVC.model=self.model;
+    }
 }
 
 @end

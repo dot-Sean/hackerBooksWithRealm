@@ -24,6 +24,9 @@ static NSString * const reuseIdentifier = @"NoteCell";
     self.collectionView.emptyDataSetSource = self;
     self.collectionView.emptyDataSetDelegate = self;
     
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style: UIBarButtonItemStylePlain target:self action:@selector(Back)];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
     //Add ToolBar with delete Button And Share Button
     UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteAction)];
     UIBarButtonItem *actionBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareAction)];
@@ -188,6 +191,12 @@ static NSString * const reuseIdentifier = @"NoteCell";
 }
 
 #pragma mark -Targets
+
+- (IBAction)Back
+{
+    [self dismissViewControllerAnimated:YES completion:nil]; // ios 6
+}
+
 -(void) selectAction{
     [self configureMultipleSelectionView];
 }
@@ -236,6 +245,7 @@ static NSString * const reuseIdentifier = @"NoteCell";
     NewNoteViewController *newNoteVC = [navVC.viewControllers firstObject];
     newNoteVC.model=self.model;
     newNoteVC.creatingNote=[self.selectedNotes firstObject];
+    newNoteVC.bookPage=[self.actualPage integerValue];
     newNoteVC.delegate=self;
 
 }

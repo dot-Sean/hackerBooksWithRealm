@@ -19,6 +19,7 @@
 @property Image *image;
 @property Location *location;
 @property int milliseconds;
+@property int bookPage;
 
 -(id)initWithTitle:(NSString*)title;
 
