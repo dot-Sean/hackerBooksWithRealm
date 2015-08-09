@@ -1,6 +1,6 @@
 //
 //  BooksTableViewController.m
-//  HackerBooksCoreData
+//  HackerBooksCoreData 
 //
 //  Created by Jose Manuel Franco on 9/7/15.
 //  Copyright (c) 2015 Jose Manuel Franco. All rights reserved.
