@@ -76,11 +76,17 @@
         //Añadimos book a Realm
         //Creamos un tag de Favoritos
         Tag *tag=[[Tag alloc]initWithName:@"Favorites"];
+        Tag *tag1=[[Tag alloc]initWithName:@"Completed"];
+        Tag *tag2=[[Tag alloc]initWithName:@"Recent"];
         
         [context beginWriteTransaction];
         
         [Tag createOrUpdateInRealm:context
                          withValue:tag];
+        [Tag createOrUpdateInRealm:context
+                         withValue:tag1];
+        [Tag createOrUpdateInRealm:context
+                         withValue:tag2];
         [Book createOrUpdateInRealm:context
                           withValue:book];
         

@@ -8,7 +8,6 @@
         <mutableArray key="OpenSans-Bold.ttf">
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
         </mutableArray>
         <mutableArray key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
@@ -21,55 +20,87 @@
         <scene sceneID="NEr-UP-iJT">
             <objects>
                 <tableViewController storyboardIdentifier="BookTableSB" id="zC5-dw-vvY" customClass="BooksTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="55" sectionHeaderHeight="10" sectionFooterHeight="5" id="M4q-OW-YM6">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="70" sectionHeaderHeight="7" sectionFooterHeight="3" id="M4q-OW-YM6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BookCell" rowHeight="58" id="kLC-8v-3ey" customClass="BookCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookCell" rowHeight="70" id="kLC-8v-3ey" customClass="BookCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kLC-8v-3ey" id="EUr-NP-ti5">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="462" translatesAutoresizingMaskIntoConstraints="NO" id="h7P-hf-ljo">
-                                            <rect key="frame" x="61" y="10" width="538" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="462" translatesAutoresizingMaskIntoConstraints="NO" id="h7P-hf-ljo">
+                                            <rect key="frame" x="61" y="15" width="500" height="21"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" fixedFrame="YES" image="noImage" translatesAutoresizingMaskIntoConstraints="NO" id="hmh-Yk-hev">
-                                            <rect key="frame" x="3" y="7" width="50" height="44"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="noImage" translatesAutoresizingMaskIntoConstraints="NO" id="hmh-Yk-hev">
+                                            <rect key="frame" x="-2" y="5" width="50" height="60"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="60" id="JOC-7H-WaD"/>
+                                                <constraint firstAttribute="width" constant="50" id="aVE-d7-CHI"/>
+                                            </constraints>
                                         </imageView>
                                         <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aeO-Ok-c0r">
-                                            <rect key="frame" x="3" y="51" width="50" height="2"/>
+                                            <rect key="frame" x="0.0" y="67" width="50" height="2"/>
                                         </progressView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" fixedFrame="YES" text="Authors" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="plW-Go-63w">
-                                            <rect key="frame" x="61" y="36" width="539" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Authors" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="plW-Go-63w">
+                                            <rect key="frame" x="61" y="39" width="500" height="18"/>
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999964" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAq-4V-2W2">
-                                            <rect key="frame" x="289" y="0.0" width="30" height="17"/>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bookFinished" translatesAutoresizingMaskIntoConstraints="NO" id="pdA-3x-dbY">
+                                            <rect key="frame" x="571" y="18" width="30" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="IS3-85-77w"/>
+                                                <constraint firstAttribute="height" constant="35" id="WNs-hk-6en"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999964" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAq-4V-2W2">
+                                            <rect key="frame" x="571" y="53" width="30" height="17"/>
                                             <color key="backgroundColor" red="0.91356744798155787" green="1" blue="0.92031956400631765" alpha="0.33000000000000002" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
-                                            <color key="textColor" red="1" green="0.052242235489999997" blue="0.001723545744" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Finished" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLm-sN-L8G">
-                                            <rect key="frame" x="262" y="41" width="57" height="13"/>
-                                            <color key="backgroundColor" red="0.913567448" green="1" blue="0.92031956400000003" alpha="0.33000000000000002" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="17" id="cwC-lw-ZXb"/>
+                                                <constraint firstAttribute="width" constant="30" id="n6p-zI-SmP"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
                                             <color key="textColor" red="1" green="0.052242235489999997" blue="0.001723545744" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="plW-Go-63w" firstAttribute="leading" secondItem="hmh-Yk-hev" secondAttribute="trailing" constant="13" id="0wx-f7-TfS"/>
+                                        <constraint firstItem="plW-Go-63w" firstAttribute="top" secondItem="h7P-hf-ljo" secondAttribute="bottom" constant="2.5" id="9bS-Pb-FFN"/>
+                                        <constraint firstItem="pdA-3x-dbY" firstAttribute="leading" secondItem="plW-Go-63w" secondAttribute="trailing" constant="10" id="ATs-cB-uoV"/>
+                                        <constraint firstItem="rAq-4V-2W2" firstAttribute="top" secondItem="pdA-3x-dbY" secondAttribute="bottom" id="GJq-Fd-SJb"/>
+                                        <constraint firstItem="hmh-Yk-hev" firstAttribute="top" secondItem="EUr-NP-ti5" secondAttribute="topMargin" constant="-3" id="H7g-VU-Khq"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="rAq-4V-2W2" secondAttribute="trailing" constant="-9" id="IdR-ZL-lun"/>
+                                        <constraint firstItem="pdA-3x-dbY" firstAttribute="leading" secondItem="h7P-hf-ljo" secondAttribute="trailing" constant="10" id="KW8-ph-8rF"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="plW-Go-63w" secondAttribute="bottom" constant="5.5" id="LZl-Ud-irb"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="pdA-3x-dbY" secondAttribute="trailing" constant="-9" id="O4s-W9-GuY"/>
+                                        <constraint firstItem="h7P-hf-ljo" firstAttribute="leading" secondItem="hmh-Yk-hev" secondAttribute="trailing" constant="13" id="Tnl-eM-aoT"/>
+                                        <constraint firstItem="pdA-3x-dbY" firstAttribute="top" secondItem="EUr-NP-ti5" secondAttribute="topMargin" constant="10" id="Z2Z-Cz-1FY"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="pdA-3x-dbY" secondAttribute="bottom" constant="8.5" id="l75-1b-8Ke"/>
+                                        <constraint firstItem="h7P-hf-ljo" firstAttribute="top" secondItem="EUr-NP-ti5" secondAttribute="topMargin" constant="7" id="mvR-QB-OTZ"/>
+                                        <constraint firstItem="hmh-Yk-hev" firstAttribute="leading" secondItem="EUr-NP-ti5" secondAttribute="leadingMargin" constant="-10" id="nzq-9C-Y8m"/>
+                                        <constraint firstItem="plW-Go-63w" firstAttribute="leading" secondItem="hmh-Yk-hev" secondAttribute="trailing" constant="13" id="oog-cM-2Cd"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="rAq-4V-2W2" secondAttribute="bottom" constant="-8.5" id="p2C-WL-qEQ"/>
+                                        <constraint firstItem="pdA-3x-dbY" firstAttribute="leading" secondItem="plW-Go-63w" secondAttribute="trailing" constant="10" id="yLS-qU-XNf"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="oog-cM-2Cd"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="authorsBookLabel" destination="plW-Go-63w" id="WgX-o1-6yO"/>
                                     <outlet property="bookImageView" destination="hmh-Yk-hev" id="Q9C-JH-6lz"/>
                                     <outlet property="bookTitleLabel" destination="h7P-hf-ljo" id="tRk-3M-Ide"/>
-                                    <outlet property="finishedLabel" destination="BLm-sN-L8G" id="r1B-cC-dfl"/>
+                                    <outlet property="finishedView" destination="pdA-3x-dbY" id="iPF-ok-o8a"/>
                                     <outlet property="pageNumberLabel" destination="rAq-4V-2W2" id="Vs0-4Q-QIr"/>
                                     <outlet property="progressBar" destination="aeO-Ok-c0r" id="1gK-Nz-yW6"/>
                                 </connections>
@@ -470,6 +501,7 @@
     </scenes>
     <resources>
         <image name="book" width="22" height="22"/>
+        <image name="bookFinished" width="30" height="30"/>
         <image name="noImage" width="512" height="512"/>
         <image name="note" width="22" height="22"/>
         <image name="starNoFav" width="24" height="22"/>

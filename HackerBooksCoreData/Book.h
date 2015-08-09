@@ -22,6 +22,7 @@
 @property NSString *title;
 @property NSString *imageUrl;
 @property NSString *pdfUrl;
+@property NSDate *lastOpened;
 @property bool favorite;
 @property long lastPageRead;
 @property bool isFinished;

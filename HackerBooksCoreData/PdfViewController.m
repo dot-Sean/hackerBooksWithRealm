@@ -104,18 +104,35 @@
             [context beginWriteTransaction];
             if([self.document.pageNumber integerValue]==[self.document.pageCount integerValue]){
                 self.model.isFinished=YES;
+                [self addModelToBooksFinished];
             }else{
                 self.model.isFinished=NO;
             }
-        
+            self.model.lastOpened=[NSDate date];
+                    [self addModelToRecentBooks];
             self.model.lastPageRead=[self.document.pageNumber integerValue];
             [context commitWriteTransaction];
+            
             //Notificamos
             [self notifyThatBookDidChange];
         }
         
     }];
 }
+
+- (void)addModelToBooksFinished{
+    RLMResults *tagResult = [Tag objectsWhere:@"tagName = 'Completed' "];
+    Tag *completedTag=[tagResult objectAtIndex:0];
+    [self.model.tags addObject:completedTag];
+}
+
+- (void)addModelToRecentBooks{
+    RLMResults *tagResult = [Tag objectsWhere:@"tagName = 'Recent' "];
+    Tag *recentTag=[tagResult objectAtIndex:0];
+    [self.model.tags addObject:recentTag];
+}
+
+
 
 #pragma maek - ToolbarDelegate
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar doneButton:(UIButton *)button{

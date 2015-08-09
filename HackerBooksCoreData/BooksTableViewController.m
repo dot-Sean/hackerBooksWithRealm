@@ -123,7 +123,7 @@ titleForHeaderInSection:(NSInteger)section{
     //cell.imageView.image = [UIImage imageWithData:(imageData)];
     customCell.bookTitleLabel.text=book.title;
     customCell.authorsBookLabel.text=[self createAuthorsString:book.authors];
-    customCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    //customCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     customCell.bookImageView.image = [UIImage imageNamed:@"noImage"];
     
     if(book.lastPageRead){
@@ -134,9 +134,9 @@ titleForHeaderInSection:(NSInteger)section{
     }
     
     if(book.isFinished){
-        customCell.finishedLabel.hidden=NO;
+        customCell.finishedView.hidden=NO;
     }else{
-        customCell.finishedLabel.hidden=YES;
+        customCell.finishedView.hidden=YES;
     }
     [self setImageFromBook:book
                     toCell:customCell];

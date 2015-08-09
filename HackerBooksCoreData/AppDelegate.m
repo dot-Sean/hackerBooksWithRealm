@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "CRODataHandler.h"
 #import "AFNetworkActivityIndicatorManager.h"
+#import "Tag.h"
 
 NSString *const JSON_DOWNLOADED_AND_PARSED = @"jsonDownloadedAndParsed";
 
@@ -33,7 +34,51 @@ NSString *const JSON_DOWNLOADED_AND_PARSED = @"jsonDownloadedAndParsed";
                toRealmContext:realm];
          [[NSUserDefaults standardUserDefaults]setBool:YES forKey:JSON_DOWNLOADED_AND_PARSED];
      }
+    [self refreshRecentTag];
     return YES;
+}
+
+-(void) refreshRecentTag{
+    RLMResults *tagResult = [Tag objectsWhere:@"tagName = 'Recent' "];
+    Tag *recentTag=[tagResult objectAtIndex:0];
+    NSDate *now=[NSDate date];
+    int index=0;
+    RLMRealm *context = [RLMRealm defaultRealm];
+    [context beginWriteTransaction];
+    for(Book *book in recentTag.books){
+        int days=[self daysBetweenFromDate:book.lastOpened toDate:now];
+        if(days>7){
+            for(Tag *tag in book.tags){
+                if([tag.tagName isEqualToString:@"Recent"]){
+                    break;
+                }
+                index++;
+            }
+            [book.tags removeObjectAtIndex:index];
+        }
+    }
+    [context commitWriteTransaction];
+}
+           
+-(int) daysBetweenFromDate:(NSDate*)fromDateTime toDate:(NSDate*)toDateTime {
+    NSDate *fromDate;
+    NSDate *toDate;
+    
+    //initialize the calender
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    //Returns by reference the starting time and duration of a given calendar unit that contains a given date.
+    [calendar rangeOfUnit:NSCalendarUnitDay startDate:&fromDate
+                 interval:NULL forDate:fromDateTime];
+    
+    [calendar rangeOfUnit:NSCalendarUnitDay startDate:&toDate
+                 interval:NULL forDate:toDateTime];
+    
+    //Returns, as an NSDateComponents object using specified components, the difference between two supplied dates.
+    NSDateComponents *difference = [calendar components:NSCalendarUnitDay
+                                               fromDate:fromDate toDate:toDate options:0];
+    
+    return [difference day];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

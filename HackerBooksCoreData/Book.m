@@ -23,6 +23,7 @@
         self.imageUrl=imageUrl;
         self.pdfUrl=pdfUrl;
         self.favorite=NO;
+        self.lastOpened=[NSDate dateWithTimeIntervalSince1970:1];
     }
     return self;
 }
