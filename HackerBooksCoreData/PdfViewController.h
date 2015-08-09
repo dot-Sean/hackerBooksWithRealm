@@ -10,6 +10,7 @@
 #import "ReaderViewController.h"
 #import "Book.h"
 #import "ReaderMainToolbar.h"
+#import "BookViewController.h"
 
 @interface PdfViewController : UIViewController<ReaderViewControllerDelegate,ReaderMainToolbarDelegate,UIGestureRecognizerDelegate>
 
@@ -18,5 +19,6 @@
 @property(strong,nonatomic) ReaderViewController *readerVC;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak,nonatomic) id<GestureDelegate> gestureDelegate;
+@property (weak,nonatomic) id<CROBookViewControllerDelegate> bookChangeDelegate;
 
 @end

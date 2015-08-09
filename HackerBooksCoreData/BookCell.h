@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *bookTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *authorsBookLabel;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
+@property (weak, nonatomic) IBOutlet UILabel *pageNumberLabel;
 
 @end

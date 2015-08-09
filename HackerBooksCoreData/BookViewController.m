@@ -11,6 +11,7 @@
 #import "PdfViewController.h"
 #import "AFHTTPRequestOperation.h"
 #import "NotesViewController.h"
+#import "BooksTableViewController.h"
 
 @interface BookViewController ()
 
@@ -163,9 +164,11 @@
         NotesViewController *notesVC = segue.destinationViewController;
         notesVC.model=self.model;
     }else if ([segue.identifier isEqualToString:@"ShowBookPdf"]) {
+        //BooksTableViewController *booksTVC = [segue ];
         PdfViewController *pdfVC = segue.destinationViewController;
         pdfVC.document =[self generateDocument];
         pdfVC.model=self.model;
+        //pdfVC.bookChangeDelegate=booksTVC;
     }
 }
 

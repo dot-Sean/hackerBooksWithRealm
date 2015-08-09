@@ -84,10 +84,15 @@
 - (void)dismissReaderViewController:(ReaderViewController *)viewController{
     
     [self dismissViewControllerAnimated:YES completion:^{
-        RLMRealm *context = [RLMRealm defaultRealm];
-        [context beginWriteTransaction];
-        self.model.lastPageRead=[self.document.pageNumber integerValue];
-        [context commitWriteTransaction];
+        if(self.model.lastPageRead!=[self.document.pageNumber integerValue]){
+            RLMRealm *context = [RLMRealm defaultRealm];
+            [context beginWriteTransaction];
+            self.model.lastPageRead=[self.document.pageNumber integerValue];
+            [context commitWriteTransaction];
+            //avisamos delegado
+            [self.bookChangeDelegate didChangeBook:self.model];
+        }
+        
     }];
 }
 
