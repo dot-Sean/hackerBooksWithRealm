@@ -24,6 +24,7 @@
 @property NSString *pdfUrl;
 @property bool favorite;
 @property long lastPageRead;
+@property bool isFinished;
 @property(nonatomic) Image *bookImage;
 @property Pdf *bookPdf;
 @property RLMArray<Tag> *tags;

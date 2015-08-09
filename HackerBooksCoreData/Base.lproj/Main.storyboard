@@ -8,6 +8,7 @@
         <mutableArray key="OpenSans-Bold.ttf">
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
         </mutableArray>
         <mutableArray key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
@@ -55,12 +56,20 @@
                                             <color key="textColor" red="1" green="0.052242235489999997" blue="0.001723545744" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Finished" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLm-sN-L8G">
+                                            <rect key="frame" x="262" y="41" width="57" height="13"/>
+                                            <color key="backgroundColor" red="0.913567448" green="1" blue="0.92031956400000003" alpha="0.33000000000000002" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
+                                            <color key="textColor" red="1" green="0.052242235489999997" blue="0.001723545744" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="authorsBookLabel" destination="plW-Go-63w" id="WgX-o1-6yO"/>
                                     <outlet property="bookImageView" destination="hmh-Yk-hev" id="Q9C-JH-6lz"/>
                                     <outlet property="bookTitleLabel" destination="h7P-hf-ljo" id="tRk-3M-Ide"/>
+                                    <outlet property="finishedLabel" destination="BLm-sN-L8G" id="r1B-cC-dfl"/>
                                     <outlet property="pageNumberLabel" destination="rAq-4V-2W2" id="Vs0-4Q-QIr"/>
                                     <outlet property="progressBar" destination="aeO-Ok-c0r" id="1gK-Nz-yW6"/>
                                 </connections>

@@ -125,9 +125,18 @@ titleForHeaderInSection:(NSInteger)section{
     customCell.authorsBookLabel.text=[self createAuthorsString:book.authors];
     customCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     customCell.bookImageView.image = [UIImage imageNamed:@"noImage"];
+    
     if(book.lastPageRead){
         customCell.pageNumberLabel.text=[NSString stringWithFormat:@"%ld",book.lastPageRead];
         customCell.pageNumberLabel.hidden=NO;
+    }else{
+        customCell.pageNumberLabel.hidden=YES;
+    }
+    
+    if(book.isFinished){
+        customCell.finishedLabel.hidden=NO;
+    }else{
+        customCell.finishedLabel.hidden=YES;
     }
     [self setImageFromBook:book
                     toCell:customCell];

@@ -99,9 +99,15 @@
 - (void)dismissReaderViewController:(ReaderViewController *)viewController{
     
     [self dismissViewControllerAnimated:YES completion:^{
-        if(self.model.lastPageRead!=[self.document.pageNumber integerValue]){
+                if(self.model.lastPageRead!=[self.document.pageNumber integerValue]){
             RLMRealm *context = [RLMRealm defaultRealm];
             [context beginWriteTransaction];
+            if([self.document.pageNumber integerValue]==[self.document.pageCount integerValue]){
+                self.model.isFinished=YES;
+            }else{
+                self.model.isFinished=NO;
+            }
+        
             self.model.lastPageRead=[self.document.pageNumber integerValue];
             [context commitWriteTransaction];
             //Notificamos
