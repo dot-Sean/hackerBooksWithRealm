@@ -99,7 +99,7 @@
 - (void)dismissReaderViewController:(ReaderViewController *)viewController{
     
     [self dismissViewControllerAnimated:YES completion:^{
-                if(self.model.lastPageRead!=[self.document.pageNumber integerValue]){
+        if(self.model.lastPageRead!=[self.document.pageNumber integerValue]){
             RLMRealm *context = [RLMRealm defaultRealm];
             [context beginWriteTransaction];
             if([self.document.pageNumber integerValue]==[self.document.pageCount integerValue]){
@@ -107,17 +107,27 @@
                 [self addModelToBooksFinished];
             }else{
                 self.model.isFinished=NO;
+                int index=0;
+                for (Tag *tag in self.model.tags){
+                    if([tag.tagName isEqualToString:@"Completed"]){
+                        [self.model.tags removeObjectAtIndex:index];
+                        break;
+                    }
+                    index++;
+                }
             }
             self.model.lastOpened=[NSDate date];
-                    [self addModelToRecentBooks];
+            
             self.model.lastPageRead=[self.document.pageNumber integerValue];
             [context commitWriteTransaction];
-            
-            //Notificamos
-            [self notifyThatBookDidChange];
         }
-        
+        RLMRealm *context = [RLMRealm defaultRealm];
+        [context beginWriteTransaction];
+        [self addModelToRecentBooks];
+        [context commitWriteTransaction];
+        [self notifyThatBookDidChange];
     }];
+    
 }
 
 - (void)addModelToBooksFinished{
@@ -127,9 +137,18 @@
 }
 
 - (void)addModelToRecentBooks{
-    RLMResults *tagResult = [Tag objectsWhere:@"tagName = 'Recent' "];
-    Tag *recentTag=[tagResult objectAtIndex:0];
-    [self.model.tags addObject:recentTag];
+    Tag *recentTag=nil;
+    for (Tag *tag in self.model.tags){
+        if([tag.tagName isEqualToString:@"Recent"]){
+            recentTag=tag;
+            break;
+        }
+    }
+    if(!recentTag){
+        RLMResults *tagResult = [Tag objectsWhere:@"tagName = 'Recent' "];
+        Tag *recentTag=[tagResult objectAtIndex:0];
+        [self.model.tags addObject:recentTag];
+    }
 }
 
 
