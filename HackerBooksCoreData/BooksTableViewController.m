@@ -11,6 +11,9 @@
 #import "BookCell.h"
 #import "BookViewController.h"
 #import "AFHTTPRequestOperation.h"
+#define BOOK_KEY @"BOOK_KEY"
+
+#define BOOK_DID_CHANGE_NOTIFICATION @"BOOK_DID_CHANGE_NOTIFICATION"
 
 @interface BooksTableViewController ()
 
@@ -20,6 +23,9 @@
 
 @implementation BooksTableViewController
 
+-(void) dealloc{
+    [self tearDownNotifications];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,11 +46,26 @@
     self.searchController.searchBar.scopeButtonTitles=@[@"Tags",@"Title",@"Authors"];
     self.searchController.searchBar.delegate = self;
     
-    
-    
     self.tableView.tableHeaderView = self.searchController.searchBar;
     
     self.definesPresentationContext = YES;
+    
+    // Alta en notificaciones de library
+    [self setupNotifications];
+}
+
+-(void)setupNotifications{
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(didChangeBook:)
+               name:BOOK_DID_CHANGE_NOTIFICATION
+             object:nil];
+}
+
+-(void) tearDownNotifications{
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {

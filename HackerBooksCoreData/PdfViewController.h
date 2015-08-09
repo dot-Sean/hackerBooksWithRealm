@@ -19,6 +19,5 @@
 @property(strong,nonatomic) ReaderViewController *readerVC;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak,nonatomic) id<GestureDelegate> gestureDelegate;
-@property (weak,nonatomic) id<CROBookViewControllerDelegate> bookChangeDelegate;
 
 @end

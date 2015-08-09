@@ -11,6 +11,9 @@
 #import "ReaderMainToolbar.h"
 #import "NotesViewController.h"
 
+#define BOOK_DID_CHANGE_NOTIFICATION @"BOOK_DID_CHANGE_NOTIFICATION"
+#define BOOK_KEY @"BOOK_KEY"
+
 @interface PdfViewController ()
 
 @end
@@ -39,6 +42,18 @@
     [self.view addGestureRecognizer:doubleTapTwo];
     
     [singleTapOne requireGestureRecognizerToFail:doubleTapOne]; // Single tap requires double tap to fail
+    
+}
+
+-(void) notifyThatBookDidChange{
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    
+    NSNotification *n = [NSNotification
+                         notificationWithName:BOOK_DID_CHANGE_NOTIFICATION
+                         object:self
+                         userInfo:@{BOOK_KEY:self.model}];
+    [nc postNotification:n];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -89,8 +104,8 @@
             [context beginWriteTransaction];
             self.model.lastPageRead=[self.document.pageNumber integerValue];
             [context commitWriteTransaction];
-            //avisamos delegado
-            [self.bookChangeDelegate didChangeBook:self.model];
+            //Notificamos
+            [self notifyThatBookDidChange];
         }
         
     }];
