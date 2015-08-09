@@ -14,6 +14,7 @@
 
 @interface Note : RLMObject
 @property NSString *title;
+@property NSString *noteBody;
 @property NSDate *creationDate;
 @property NSDate *lastModificationDate;
 @property Image *image;

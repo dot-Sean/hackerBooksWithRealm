@@ -11,6 +11,7 @@
 NSString *const kSelectorImage = @"selectorImage";
 NSString *const kSelectorLocation = @"selectorLocation";
 NSString *const kSelectorImagePopover = @"selectorImagePopover";
+NSString *const kTextView = @"textView";
 
 @interface NewNoteViewController ()
 
@@ -37,6 +38,7 @@ NSString *const kSelectorImagePopover = @"selectorImagePopover";
     XLFormRowDescriptor * row;
     XLFormRowDescriptor * row2;
     XLFormRowDescriptor * row3;
+    XLFormRowDescriptor * row4;
     
     
     form = [XLFormDescriptor formDescriptorWithTitle:@"Add Note"];
@@ -60,6 +62,13 @@ NSString *const kSelectorImagePopover = @"selectorImagePopover";
     row3.valueTransformer = [LocationValueTransformer class];
     //row3.value = [[CLLocation alloc] initWithLatitude:-33 longitude:-56];
     [section addFormRow:row3];
+    
+    section = [XLFormSectionDescriptor formSection];
+    [form addFormSection:section];
+    row4 = [XLFormRowDescriptor formRowDescriptorWithTag:kTextView rowType:XLFormRowDescriptorTypeTextView];
+    [row4.cellConfigAtConfigure setObject:@"Note Body" forKey:@"textView.placeholder"];
+    [section addFormRow:row4];
+
 
     self.form = form;
     
@@ -80,10 +89,12 @@ NSString *const kSelectorImagePopover = @"selectorImagePopover";
     XLFormRowDescriptor *row =  [self.form formRowWithTag:@"Title"];
     XLFormRowDescriptor *row2 = [self.form formRowWithTag:kSelectorImage];
     XLFormRowDescriptor *row3 = [self.form formRowWithTag:kSelectorLocation];
+    XLFormRowDescriptor *row4 = [self.form formRowWithTag:kTextView];
     
     row.value=self.creatingNote.title;
     row2.value=self.creatingNote.image;
     row3.value=self.creatingNote.location;
+    row4.value=self.creatingNote.noteBody;
     self.selector=row2;
     self.selector2=row3;
     self.selector.value=self.creatingNote.image;
@@ -113,6 +124,7 @@ NSString *const kSelectorImagePopover = @"selectorImagePopover";
     [self.tableView endEditing:YES];
     //Guardamos en BBDD
     NSString *title=[self.formValues valueForKey:@"Title"];
+    NSString *noteBody=[self.formValues valueForKey:@"textView"];
     
     RLMRealm *context = [RLMRealm defaultRealm];
     [context beginWriteTransaction];
@@ -120,6 +132,7 @@ NSString *const kSelectorImagePopover = @"selectorImagePopover";
     self.creatingNote.image=self.selector.value;
     self.creatingNote.location=self.selector2.value;
     self.creatingNote.bookPage=self.bookPage;
+    self.creatingNote.noteBody=noteBody;
     if(self.modifying){
         self.creatingNote.lastModificationDate=[NSDate date];
         [Note createOrUpdateInRealm:context
