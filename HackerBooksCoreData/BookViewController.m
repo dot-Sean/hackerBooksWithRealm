@@ -73,6 +73,7 @@
 - (IBAction)viewBook:(id)sender {
     //Tenemos que descargar el book y meterlo en la BBDD
     [self getPdfDataFromBook:self.model];
+    NSLog(@"Acaba");
     
 }
 
@@ -101,7 +102,7 @@
         
         [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
             self.progressView.progress = (float) totalBytesRead/totalBytesExpectedToRead;
-            self.progressLabel.text=[NSString stringWithFormat:@"Downloading %lld/%lld",totalBytesRead,totalBytesExpectedToRead];
+            self.progressLabel.text=[NSString stringWithFormat:@"Downloading %.2f%%",self.progressView.progress*100];
         }];
         
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -119,6 +120,7 @@
             self.progressView.progress=0;
             self.progressLabel.text=@"Downloading...";
             [self relocatePdf:self.model];
+            [self performSegueWithIdentifier:@"ShowBookPdf" sender:self];
            // [self generateDocument];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //NSLog(@"Error: %@", error);
@@ -127,6 +129,7 @@
         [operation start];
     }else{
         [self relocatePdf:self.model];
+        [self performSegueWithIdentifier:@"ShowBookPdf" sender:self];
     }
     return book.bookPdf.data;
 }
@@ -160,7 +163,6 @@
         NotesViewController *notesVC = segue.destinationViewController;
         notesVC.model=self.model;
     }else if ([segue.identifier isEqualToString:@"ShowBookPdf"]) {
-        [self getPdfDataFromBook:self.model];
         PdfViewController *pdfVC = segue.destinationViewController;
         pdfVC.document =[self generateDocument];
         pdfVC.model=self.model;

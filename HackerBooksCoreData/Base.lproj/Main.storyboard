@@ -105,7 +105,6 @@
                                     <barButtonItem image="book" style="plain" id="3Xm-wG-tWH">
                                         <connections>
                                             <action selector="viewBook:" destination="r90-q8-UbJ" id="wUt-Pn-iME"/>
-                                            <segue destination="8LG-Aj-orN" kind="showDetail" identifier="ShowBookPdf" id="zcT-qS-RFY"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -192,6 +191,7 @@
                         <outlet property="imageView" destination="OOK-fq-wsy" id="6xv-D8-UX8"/>
                         <outlet property="progressLabel" destination="RE8-PP-Cny" id="VF2-CX-HP3"/>
                         <outlet property="progressView" destination="eFb-Oj-cSh" id="ot9-8t-Fd3"/>
+                        <segue destination="8LG-Aj-orN" kind="showDetail" identifier="ShowBookPdf" id="2cb-IE-4AF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pp6-2o-nFE" userLabel="First Responder" sceneMemberID="firstResponder"/>
