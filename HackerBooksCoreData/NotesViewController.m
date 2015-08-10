@@ -163,6 +163,7 @@ static NSString * const reuseIdentifier = @"NoteCell";
 - (void) didChangeNote:(Note *)note{
     //No es muy eficiente.
     [self.collectionView reloadData];
+    [self configureSingleSelectionView];
 }
 
 
@@ -184,9 +185,17 @@ static NSString * const reuseIdentifier = @"NoteCell";
     self.collectionView.allowsMultipleSelection=NO;
     
     UIBarButtonItem *addBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAction)];
-    UIBarButtonItem *selectBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Select" style:UIBarButtonItemStylePlain target:self action:@selector(selectAction)];
-    self.navigationItem.rightBarButtonItem=nil;
-    self.navigationItem.rightBarButtonItems = [[NSArray alloc] initWithObjects:addBarButtonItem, selectBarButtonItem, nil];
+    if([self.model.notes count]==0){
+        //No anadimos boton Select
+        self.navigationItem.rightBarButtonItems = [[NSArray alloc] initWithObjects:addBarButtonItem,nil];
+        
+    }else{
+        
+        UIBarButtonItem *selectBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Select" style:UIBarButtonItemStylePlain target:self action:@selector(selectAction)];
+        self.navigationItem.rightBarButtonItem=nil;
+        self.navigationItem.rightBarButtonItems = [[NSArray alloc] initWithObjects:addBarButtonItem, selectBarButtonItem, nil];
+    }
+    
     self.navigationController.toolbarHidden=YES;
 }
 
@@ -236,6 +245,7 @@ static NSString * const reuseIdentifier = @"NoteCell";
     }
     [context commitWriteTransaction];
     [self.collectionView reloadData];
+    [self configureSingleSelectionView];
 }
 
 #pragma mark -Segue Storyboard
